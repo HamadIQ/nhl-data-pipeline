@@ -21,8 +21,8 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 ├── README.md
 ```
 ## Data Sources & References
-[NHL Clean Shots Data on Kaggle] (https://www.kaggle.com/datasets/samuarg/nhl-clean-shots-data-2020-2021-to-2024-2025)
-[NHL API Reference] (https://github.com/Zmalski/NHL-API-Reference)
+- [NHL Clean Shots Data on Kaggle] (https://www.kaggle.com/datasets/samuarg/nhl-clean-shots-data-2020-2021-to-2024-2025)
+- [NHL API Reference] (https://github.com/Zmalski/NHL-API-Reference)
 
 The API reference is an unofficial community maintained resource. Refer to the linked documentation for endpoint details.
 
