@@ -1,0 +1,49 @@
+name: NHL ETL Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-etl:
+    name: Run NHL ETL Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        
+      - name: Verify input data exists
+        run: |
+          test -f data/raw/nhl_shots_data.csv
+      
+      - name: Fetch player names
+        run: python fetch_players.py
+
+      - name: Transform shot data
+        run: python nhl_etl_pipeline.py
+      
+      - name: Aggregate player statistics
+        run: python aggregate_player_stats.py
+      
+      - name: Generate CSV and Parquet outputs
+        run: python compress_file.py
