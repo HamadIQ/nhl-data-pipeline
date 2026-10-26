@@ -25,10 +25,11 @@ class NhlInfraStack(Stack):
             )
         # OpenID Connect 
         # Connects with github in a secure trust relationship
-        provider = iam.OpenIdConnectProvider.from_open_id_connect_provider_arn(
+        provider = iam.OpenIdConnectProvider(
             self,
             "GitHubProvider",
-            open_id_connect_provider_arn=f"arn:aws:iam::{self.account}:oidc-provider/token.actions.githubusercontent.com"
+            url="https://token.actions.githubusercontent.com",
+            client_ids=["sts.amazonaws.com"]
         )
         # Creates a short lived execution role that Github Actions will assume
         # Only trusts tokens originating from this specific repository 
