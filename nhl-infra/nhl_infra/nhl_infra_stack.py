@@ -43,7 +43,7 @@ class NhlInfraStack(Stack):
                         "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
                     },
                     "StringLike":{
-                        "token.actions.githubusercontent.com:sub": "repo:*/nhl-data-pipeline:*"
+                        "token.actions.githubusercontent.com:sub": "repo:HamadIQ@92189959/nhl-data-pipeline@1431826266:ref:refs/heads/main"
                     }
                 }
             )
