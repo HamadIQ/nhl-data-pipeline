@@ -13,9 +13,11 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 | :---: | :---: | :---: | :---: | :---: |
 | 20202021 | Auston Matthews | 41 | 25.59 | 15.41 |
 | 20202021 | Connor McDavid | 33 | 20.53 | 12.37 |
-| 20202021 | Alex DeBricant | 32 | 13.89 | 18.11 |
+| 20202021 | Alex DeBrincat | 32 | 13.89 | 18.11 |
 | 20202021 | Leon Draisaitl | 31 | 15.59 | 15.41 |
 | 20202021 | Mikko Rantanen | 30 | 16.62 | 13.38 |
+
+For the complete dataset, check [data/compressed/](./data/compressed/) directory.
 
 ## Project Structure
 ```text
