@@ -3,7 +3,7 @@ import pandas as pd
 
 def compress_file(input_path, output_path_parquet, output_path_csv):
     if not os.path.exists(input_path):
-        raise FileNotFoundError(f"Error: taget file {input_path} not found")
+        raise FileNotFoundError(f"Error: target file {input_path} not found")
     
     df = pd.read_csv(input_path)
 
@@ -38,7 +38,7 @@ def compress_file(input_path, output_path_parquet, output_path_csv):
     # Export to a csv
     df_final.to_csv(output_path_csv, index=False, float_format='%.2f')
 if __name__ == "__main__":
-    input = "data/processed/nhl_yearly_goals_vs_xgf.csv"
+    input_file = "data/processed/nhl_yearly_goals_vs_xgf.csv"
     output_parquet = "data/compressed/nhl_yearly_goals_vs_xgf.parquet"
     output_csv = "data/compressed/nhl_yearly_goals_vs_xgf_preview.csv"
-    compress_file(input, output_parquet, output_csv) 
+    compress_file(input_file, output_parquet, output_csv) 
