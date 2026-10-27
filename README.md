@@ -7,7 +7,16 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 - Heuristic expected goals estimation
 - Player statistics
 - Raw and processed data organization
-- Planned interactive Streamlit dashboard
+- AWS S3 Bucket Deployment
+## Dataset Preview
+| Season | Player Name | Actual Goals | XGF | Goals Minus XGF |
+| :---: | :---: | :---: | :---: | :---: |
+| 20202021 | Auston Matthews | 41 | 25.59 | 15.41 |
+| 20202021 | Connor McDavid | 33 | 20.53 | 12.37 |
+| 20202021 | Alex DeBricant | 32 | 13.89 | 18.11 |
+| 20202021 | Leon Draisaitl | 31 | 15.59 | 15.41 |
+| 20202021 | Mikko Rantanen | 30 | 16.62 | 13.38 |
+
 ## Project Structure
 ```text
 .
@@ -15,8 +24,13 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 ├── fetch_players.py
 ├── nhl_etl_pipeline.py
 ├── data/
+│        ├── compressed/
 │        ├── raw/
-│        └── processed /
+│        └── processed/
+│── .github/
+│        └── workflows/
+│── nhl-infra/
+│        └──nhl_infra/
 ├── .gitignore
 ├── README.md
 ```
@@ -31,7 +45,8 @@ The API reference is an unofficial community maintained resource. Refer to the l
 - pandas
 - numpy
 - Data engineering and ETL workflows
-- Streamlit (planned)
+- Github Actions
+- AWS S3
 
 ## Getting Started
 Clone the repository:
@@ -42,10 +57,11 @@ cd nhl-data-pipeline
 Create and activate a virtual environment, then install the projects dependencies
 
 Run the pipeline using the appropriate script order
-1. nhl_etl_pipeline.py
-2. fetch_players.py
+1. fetch_players.py
+2. nhl_etl_pipeline.oy
 3. aggregate_player_stats.py
+4. compress_file.py
 
 ## Roadmap
-- [ ] Build an interactive Streamlit dashboard
+- [ ] Build an interactive dashboard
 - [ ] Add visualization and insights from NHL shot data
