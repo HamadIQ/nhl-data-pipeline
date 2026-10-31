@@ -5,9 +5,17 @@ import time
 
 def aggregate_players(player_dict, player_stats, output_path):
     shots_df = pd.read_csv(player_stats)
+    print("Shots Dataframe")
+    print(shots_df.head(5))
     player_df = pd.read_csv(player_dict)
-    # Calculate total expected goals for each player and season
-    grouped_xgf = shots_df.groupby(['shootingPlayerId', 'season'])['xgf'].sum().reset_index()
+    # Calculate total expected goals for each player by season
+    # Creates a column to store all shots on goal for each player by season
+    grouped_xgf = shots_df.groupby(['shootingPlayerId', 'season']).agg(
+        xgf=('xgf', 'sum'),
+        Shots_On_Goal=('eventType', lambda x: x.isin(['shot-on-goal', 'goal']).sum())
+    ).reset_index()
+    print("Grouped XGF ---")
+    print(grouped_xgf.head(5))
     # NHL seasons included in the analysis
     seasons = [
         "20202021", "20212022", "20222023", "20232024", "20242025"
@@ -55,6 +63,8 @@ def aggregate_players(player_dict, player_stats, output_path):
     
     # Compare actual goals with expected goals
     final_df['goals_minus_xgf'] = final_df['actualGoals'] - final_df['xgf']
+    # Calculates Each players shooting percetage and handles 0 shots on goal case
+    final_df['Shooting Percentage'] = (final_df['actualGoals']/final_df['Shots_On_Goal']).fillna(0).replace(float('inf'), 0)
     # Group by season and actualGoals
     final_df = final_df.sort_values(by=['season', 'actualGoals'], ascending=[True, False])
     # Creates an output csv with transformed data

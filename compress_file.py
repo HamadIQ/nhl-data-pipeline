@@ -8,7 +8,7 @@ def compress_file(input_path, output_path_parquet, output_path_csv):
     df = pd.read_csv(input_path)
 
     # Adjust Column Order
-    col_order = ["season", "player_name", "actualGoals", "xgf", "goals_minus_xgf"]
+    col_order = ["season", "player_name", "actualGoals", "xgf", "goals_minus_xgf", "Shooting Percentage"]
     df_reordered = df[col_order]
 
     # Map the columns to more clear names
@@ -17,7 +17,9 @@ def compress_file(input_path, output_path_parquet, output_path_csv):
         "player_name": "Player Name",
         "actualGoals": "Actual Goals",
         "xgf": "XGF",
-        "goals_minus_xgf": "Goals Minus XGF"
+        "goals_minus_xgf": "Goals Minus XGF",
+        "Shooting Percentage": "Shooting Percentage"
+
     }
 
     # Final clean dataframe
