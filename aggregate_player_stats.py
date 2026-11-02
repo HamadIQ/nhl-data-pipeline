@@ -8,14 +8,22 @@ def aggregate_players(player_dict, player_stats, output_path):
     print("Shots Dataframe")
     print(shots_df.head(5))
     player_df = pd.read_csv(player_dict)
+    # Total number of wrist shots on goal
+    shots_df['Wrist_Shot_On_Goal'] = (shots_df['eventType'] == 'shot-on-goal') & (shots_df['shotType'] == 'wrist')
+    # Total number of slap shots on goal
+    shots_df['Slap_Shot_On_Goal'] = (shots_df['eventType'] == 'shot-on-goal') & (shots_df['shotType'] == 'slap')
+    # Total number of snap shots ong goal
+    shots_df['Snap_Shot_On_Goal'] = ((shots_df['eventType'] == 'shot-on-goal')) & (shots_df['shotType'] == 'snap') 
+    
     # Calculate total expected goals for each player by season
-    # Creates a column to store all shots on goal for each player by season
+    # Creates a column to store all shots on goal for each player by season total and by type
     grouped_xgf = shots_df.groupby(['shootingPlayerId', 'season']).agg(
         xgf=('xgf', 'sum'),
-        Shots_On_Goal=('eventType', lambda x: x.isin(['shot-on-goal', 'goal']).sum())
-    ).reset_index()
-    print("Grouped XGF ---")
-    print(grouped_xgf.head(5))
+        Shots_On_Goal=('eventType', lambda x: x.isin(['shot-on-goal', 'goal']).sum()),
+        Wrist_Shots_On_Goal_Total=('Wrist_Shot_On_Goal', 'sum'),
+        Slap_Shots_On_Goal_Total=('Slap_Shot_On_Goal', 'sum'),
+        Snap_Shots_On_Goal_Total=('Snap_Shot_On_Goal', 'sum'),
+    ).reset_index() 
     # NHL seasons included in the analysis
     seasons = [
         "20202021", "20212022", "20222023", "20232024", "20242025"
@@ -60,11 +68,8 @@ def aggregate_players(player_dict, player_stats, output_path):
     integrated_df['actualGoals'] = integrated_df['actualGoals'].fillna(0).astype(int)
     # Add player names to the results
     final_df = pd.merge(integrated_df, player_df, left_on="shootingPlayerId", right_on="shootingPlayerId", how="inner")
-    
     # Compare actual goals with expected goals
     final_df['goals_minus_xgf'] = final_df['actualGoals'] - final_df['xgf']
-    # Calculates Each players shooting percetage and handles 0 shots on goal case
-    final_df['Shooting Percentage'] = (final_df['actualGoals']/final_df['Shots_On_Goal']).fillna(0).replace(float('inf'), 0)
     # Group by season and actualGoals
     final_df = final_df.sort_values(by=['season', 'actualGoals'], ascending=[True, False])
     # Creates an output csv with transformed data

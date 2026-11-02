@@ -9,13 +9,13 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 - Raw and processed data organization
 - AWS S3 Bucket Deployment
 ## Dataset Preview
-| Season | Player Name | Actual Goals | XGF | Goals Minus XGF | Shooting Percentage |
+| Season | Player Name | Actual Goals | XGF | Goals Minus XGF | Wrist Shots On Goal | Slap Shots On Goal | Snap Shots On Goal |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 20202021 | Auston Matthews | 41 | 25.59 | 15.41 | 0.23 |
-| 20202021 | Connor McDavid | 33 | 20.53 | 12.37 | 0.20 |
-| 20202021 | Alex DeBrincat | 32 | 13.89 | 18.11 | 0.26 |
-| 20202021 | Leon Draisaitl | 31 | 15.59 | 15.41 | 0.23 |
-| 20202021 | Mikko Rantanen | 30 | 16.62 | 13.38 | 0.20 |
+| 20202021 | Auston Matthews | 41 | 25.59 | 15.41 | 103 | 13 | 18 |
+| 20202021 | Connor McDavid | 33 | 20.53 | 12.37 | 103 | 12 | 21 |
+| 20202021 | Alex DeBrincat | 32 | 13.89 | 18.11 | 77 | 12 | 26 |
+| 20202021 | Leon Draisaitl | 31 | 15.59 | 15.41 | 55 | 17 | 43 |
+| 20202021 | Mikko Rantanen | 30 | 16.62 | 13.38 | 93 | 17 | 9 |
 
 For the complete dataset, check [data/compressed/](./data/compressed/) directory.
 

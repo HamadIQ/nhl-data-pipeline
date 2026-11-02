@@ -24,7 +24,6 @@ def run_spatial_etl_pipeline(input_path, output_path):
     df = pd.read_csv(input_path)
     initial_count = len(df)
     print(f"Loaded {initial_count:,} raw records from storage")
-
     # Find rows missing shot coordinates or player IDs
     invalid_records_mask = (
         df['shootingPlayerId'].isnull() |
@@ -38,7 +37,6 @@ def run_spatial_etl_pipeline(input_path, output_path):
     print(df_clean.head())
     print("\n number or rows dropped ---")
     print(dropped_corrupt_rows)
-
     # Normalize rink coordinates to consistent shooting direction 
     df_clean['norm_x'] = df_clean['xCoord'].abs()
     df_clean['norm_y'] = df_clean['yCoord'].abs()
@@ -71,7 +69,7 @@ def run_spatial_etl_pipeline(input_path, output_path):
     # Low danger shots: distant shots with large angles,
     # or shots taken from behind the goal
     df_clean.loc[((df_clean['shot_distance']>55) & (df_clean['shot_angle']>55)) | behind_goal, 'xgf'] = 0.02
-
+    
     # Save the cleaned shot data and derived expected goals to a CSV
     print("Writing to a csv...")
     output_dir = os.path.dirname(output_path)
@@ -82,6 +80,7 @@ def run_spatial_etl_pipeline(input_path, output_path):
     final_count = len(df_clean)
     print(f"Success, pipeline completed. {final_count:,} rows\n")
     print(df_clean[['gameId', 'eventType', 'shootingPlayerId', 'shot_distance', 'shot_angle', 'xgf']].head())
+    
 
 if __name__ == "__main__":
     input_file = "data/raw/nhl_shots_data.csv"
