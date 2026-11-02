@@ -10,7 +10,7 @@ This project builds a Python based data pipeline for NHL shot data and extracts 
 - AWS S3 Bucket Deployment
 ## Dataset Preview
 | Season | Player Name | Actual Goals | XGF | Goals Minus XGF | Wrist Shots On Goal | Slap Shots On Goal | Snap Shots On Goal |
-| :---: | :---: | :---: | :---: | :---: | :---: |
+| :---: | :---: | :---: | :---: | :---: | :---: | :--: | :--: |
 | 20202021 | Auston Matthews | 41 | 25.59 | 15.41 | 103 | 13 | 18 |
 | 20202021 | Connor McDavid | 33 | 20.53 | 12.37 | 103 | 12 | 21 |
 | 20202021 | Alex DeBrincat | 32 | 13.89 | 18.11 | 77 | 12 | 26 |
